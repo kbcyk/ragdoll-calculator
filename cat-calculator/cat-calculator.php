@@ -1,50 +1,5 @@
-<?php
 
-/**
- * The plugin bootstrap file
- *
- * This file is read by WordPress to generate the plugin information in the plugin
- * admin area. This file also includes all of the dependencies used by the plugin,
- * registers the activation and deactivation functions, and defines a function
- * that starts the plugin.
- *
- * @link              https://kbweb.dk
- * @since             1.0.0
- * @package           Cat_Calculator
- *
- * @wordpress-plugin
- * Plugin Name:       Cat Calculator
- * Plugin URI:        https://kbweb.dk
- * Description:       This Plugin is used for Ragdoll cat breeders this show both color and pattern prediction for litters to use: call [draegtighedstable],[monstertable],[farvetable],[advfarvetable]
- * Version:           1.0.0
- * Author:            Kristian Bendtsen
- * Author URI:        https://kbweb.dk
- * License:           GPL-2.0+
- * License URI:       http://www.gnu.org/licenses/gpl-2.0.txt
- * Text Domain:       cat-calculator
- * Domain Path:       /languages
- */
-
-// If this file is called directly, abort.
-if ( ! defined( 'WPINC' ) ) {
-	die;
-}
-function custom_shortcode_scripts() {
-    global $post;
-    if( is_a( $post, 'WP_Post' ) && has_shortcode( $post->post_content, 'draegtighedstable') ) {
-		wp_enqueue_style( 'css-datepicker', plugin_dir_url( __FILE__ ) . '/lib/datepicker.min.css' );
-		wp_enqueue_style( 'css-tables', plugin_dir_url( __FILE__ ) . '/lib/tablestyle.css' );
-		wp_enqueue_script('js-jquery', plugin_dir_url( __FILE__ ) . '/lib/jquery.min.js', array(), '', true );
-		wp_enqueue_script('js-datepicker', plugin_dir_url( __FILE__ ) . '/lib/datepicker.min.js', array(), '', true );
-		wp_enqueue_script('js-scripts', plugin_dir_url( __FILE__ ) . '/lib/scripts.js', array(), '', true );
-    }
-}
-
-add_action( 'wp_enqueue_scripts', 'custom_shortcode_scripts');
-
-function draegtighedstable_shortcode() {
-	return '
-	<div class="row text-center">
+<div class="row text-center">
 	<div class="col-md-12"><h2 class="text-center">Drægtighedstabel</h2><br></div>
 	<div class="col-md-6">
 		<p class="font-serif">Brug parringskalenderen til at beregne den forventede fødselsdato på et kuld samt hvornår killingerne vil være gamle nok til at flytte hjemmefra.</p>
@@ -77,24 +32,7 @@ function draegtighedstable_shortcode() {
 			</table>
 		</div>
 </div>
-';
- }
-add_shortcode( 'draegtighedstable', 'draegtighedstable_shortcode' );
 
-// ############### monstertable  ##############
-
-function monstertable_shortcode_scripts() {
-    global $post;
-    if( is_a( $post, 'WP_Post' ) && has_shortcode( $post->post_content, 'monstertable') ) {
-		wp_enqueue_style( 'css-tables', plugin_dir_url( __FILE__ ) . '/lib/tablestyle.css' );
-		wp_enqueue_script('js-predictor', plugin_dir_url( __FILE__ ) . '/lib/predictor.js', array(), '', true );
-    }
-}
-
-add_action( 'wp_enqueue_scripts', 'monstertable_shortcode_scripts');
-
-function monstertable_shortcode() {
-	return '
 	<div class="row text-center">
 	<div class="col-md-12 text-center">
 		<h2 class="font-weight-bold">Mønster tabel</h2>
@@ -127,25 +65,7 @@ function monstertable_shortcode() {
 		<p class="font-weight-bold">Forventede mønster</p>
 		<h4 id="patternresult" class="font-alt resultatcolor">All Colour</h4>
 	</div>
-</div>';
- }
-
-add_shortcode( 'monstertable', 'monstertable_shortcode' );
-
-// ############### farvetable  ##############
-
-function farvetable_shortcode_scripts() {
-    global $post;
-    if( is_a( $post, 'WP_Post' ) && has_shortcode( $post->post_content, 'farvetable') ) {
-		wp_enqueue_style( 'css-tables', plugin_dir_url( __FILE__ ) . '/lib/tablestyle.css' );
-		wp_enqueue_script('js-predictor', plugin_dir_url( __FILE__ ) . '/lib/predictor.js', array(), '', true );
-    }
-}
-
-add_action( 'wp_enqueue_scripts', 'farvetable_shortcode_scripts');
-
-function farvetable_shortcode() {
-	return '
+</div>'
 	<div class="row text-center">
 	<div class="col-md-12">
 	<h3 class="font-alt font-weight-bold">Farve tabel</h3><br />
@@ -186,12 +106,6 @@ function farvetable_shortcode() {
 	</div>
 </div>
 
-';
- }
-add_shortcode( 'farvetable', 'farvetable_shortcode' );
-
-function redfarvetable_shortcode() {
-	return '
 <div class="row text-center">
 <div class="col-md-12">
 <h3 class="font-alt font-weight-bold">Rød farve tabel</h3><br />
@@ -229,24 +143,6 @@ function redfarvetable_shortcode() {
 </div>
 </div>
 
-';
- }
-add_shortcode( 'redfarvetable', 'redfarvetable_shortcode' );
-
-//Advanced
-
-function advfarvetable_shortcode_scripts() {
-    global $post;
-    if( is_a( $post, 'WP_Post' ) && has_shortcode( $post->post_content, 'farvetable') ) {
-		wp_enqueue_style( 'css-tables', plugin_dir_url( __FILE__ ) . '/lib/tablestyle.css' );
-		wp_enqueue_script('js-advpredictor', plugin_dir_url( __FILE__ ) . '/lib/newpredictor.js', array(), '', true );
-    }
-}
-
-add_action( 'wp_enqueue_scripts', 'advfarvetable_shortcode_scripts');
-
-function advfarvetable_shortcode() {
-	return '
 	<div class="col-md-12">
 		<h3 class="font-alt text-center font-weight-bold">Advanceret Farvetabel</h3><br />
 	</div>
@@ -336,6 +232,3 @@ function advfarvetable_shortcode() {
 			</table>
 		</span>
 	</div>
-';
- }
-add_shortcode( 'advfarvetable', 'advfarvetable_shortcode' );
