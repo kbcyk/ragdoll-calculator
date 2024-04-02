@@ -1,3 +1,16 @@
+<link type="text/css" href="lib/css-tables.min.css" rel="stylesheet" />
+<link type="text/css" href="lib/datepicker.min.css" rel="stylesheet" />
+
+<link type="text/css" href="lib/tablestyle.css" rel="stylesheet" />
+
+<script type="text/javascript" src="lib/jquery.min.js"></script>
+<script type="text/javascript" src="lib/datepicker.min.js"></script>
+<script type="text/javascript" src="lib/newpredictor.js"></script>
+<script type="text/javascript" src="lib/predictor.js"></script>
+<script type="text/javascript" src="lib/scripts.js"></script>
+
+
+
 
 <div class="row text-center">
 	<div class="col-md-12"><h2 class="text-center">Drægtighedstabel</h2><br></div>
